@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{user.nickname}}님 환영합니다.</h1>
+    <a href="{% url 'board:new' %}">글쓰기</a>
+    <a href="{% url 'user:logout'%}">로그아웃</a>
+    <a href="{% url 'board:mypage'%}">마이페이지</a>
+    {% for post in post %}
+        <br>
+        <h3>{{post.title}}</h3>
+        <br>
+        {{post.writer.nickname}}
+        <br>
+        {{post.post_time}}
+        <br>
+        {{post.body}}
+        <br>
+        <a href="{% url 'board:detail' post.id %}">...더보기</a>
+    {% endfor %}
+</body>
+</html>
