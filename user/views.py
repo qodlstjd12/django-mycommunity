@@ -41,7 +41,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             return redirect('user:home')
-    return render(request, 'register.html', {'form' : form})
+    return render(request, 'user/register.html', {'form' : form})
 
 def logout_view(request):
     logout(request)

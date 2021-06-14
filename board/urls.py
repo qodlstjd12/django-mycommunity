@@ -12,4 +12,7 @@ urlpatterns = [
     path('user_delete/<str:id>',views.user_delete,name='user_delete'),
     path('mypage/', views.mypage_view, name='mypage'),
     path('update/<str:id>', views.update, name='update'),
+    path('message/', views.message_view, name = 'message_view'),
+    path('comment/<str:id>',views.comment, name ='comment'),
+    path('comment_delete/<str:id>,<str:id2>', views.comment_delete, name='comment_delete')
 ]

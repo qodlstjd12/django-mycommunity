@@ -10,6 +10,9 @@
     <h1>{{post.title}}</h1>
         <br>
         글쓴이 : {{post.writer.nickname}}
+        {% if user != post.writer %}
+        <a href="">[쪽지 보내기]</a>
+        {% endif %}
         <br>
         내용 : {{post.body}}
         <br>
@@ -18,6 +21,28 @@
         <a href="{% url 'board:update' post.id %}">글 수정하기</a>
         <a href="{% url 'board:delete' post.id %}">글 삭제</a>
     {% endif%}
+    <br>
     <a href="{% url 'board:home' %}">뒤로가기</a>
+    <br>
+    <h4>댓글달기</h4>
+    <form action="{% url 'board:comment' post.id %} " method="POST">
+        <textarea name="content" cols="60" rows="5"></textarea>
+        <input type="checkbox" name = 'anonymous' checked>익명
+        <input type="submit" value = '작성'>
+    </form>
+    <br>
+    {% for comment in comment %}
+    {% if comment.post == post %}
+    작성자 : {% if not comment.anonymous %} {{comment.user.nickname}} 
+            {% else %} 익명 
+            {% endif %}
+    // 작성시간 : {{comment.comment_time}}
+    <br>
+    {{comment.content}}    {% if comment.user == user %}
+    <a href="{% url 'board:comment_delete' comment.id post.id %}">댓삭</a>
+    {% endif %}
+    <br>
+    {% endif %}
+    {% endfor %}
 </body>
 </html>

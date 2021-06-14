@@ -1,3 +1,4 @@
+from django.core.files.base import ContentFile
 from django.db import models
 from user.models import User
 # Create your models here.
@@ -12,3 +13,10 @@ class Post(models.Model):
     
     def summary(self):
         return self.body[:100]
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='posts')
+    content = models.TextField(blank=False)
+    anonymous = models.BooleanField(default=False)
+    comment_time = models.DateTimeField(auto_now_add=True)
